@@ -21,14 +21,13 @@ func redisPingHandler(w http.ResponseWriter, r *http.Request) {
         return
     }
 
-    conn, err := redis.Dial("tcp", redisHost+":6379") // Use the REDIS_HOST value
+    conn, err := redis.Dial("tcp", redisHost+":6379")
     if err != nil {
         http.Error(w, "Failed to connect to Redis", http.StatusInternalServerError)
         return
     }
-    defer conn.Close() // Ensure connection closure
+    defer conn.Close()
 
-    // Send the PING command
     pong, err := redis.String(conn.Do("PING"))
     if err != nil {
         http.Error(w, "Redis PING failed", http.StatusInternalServerError)
