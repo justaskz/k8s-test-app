@@ -1,0 +1,16 @@
+---
+services:
+  app:
+    container_name: k8s-bench__app
+    image: k8s-bench__app
+    hostname: app
+    build: .
+    ports:
+      - 8080:8080
+    environment:
+      REDIS_HOST: redis
+    volumes:
+      - .:/app
+  redis:
+    container_name: k8s-bench__redis
+    image: redis
