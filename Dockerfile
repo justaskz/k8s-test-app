@@ -1,6 +1,6 @@
-FROM golang:bookworm
+FROM golang:alpine
 WORKDIR /app
-RUN apt update -yy && apt install net-tools
+# RUN apt update -yy && apt install net-tools
 COPY . .
 RUN go mod download
 RUN go build -o /opt/app/app
