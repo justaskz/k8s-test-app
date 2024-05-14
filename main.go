@@ -11,7 +11,7 @@ import (
 
 func main() {
     http.HandleFunc("/", redisPingHandler)
-    log.Fatal(http.ListenAndServe("app:8080", nil))
+    log.Fatal(http.ListenAndServe(":8080", nil))
 }
 
 func redisPingHandler(w http.ResponseWriter, r *http.Request) {
