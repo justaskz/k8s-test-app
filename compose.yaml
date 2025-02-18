@@ -1,16 +1,16 @@
 ---
 services:
   app:
-    container_name: k8s-bench__app
-    image: k8s-bench__app
+    container_name: k8s-test__app
+    image: k8s-test__app
     hostname: app
     build: .
     ports:
       - 8080:8080
     environment:
-      REDIS_HOST: redis
+      REDIS_HOST: redis:6379
     volumes:
       - .:/app
   redis:
-    container_name: k8s-bench__redis
+    container_name: k8s-test__redis
     image: redis

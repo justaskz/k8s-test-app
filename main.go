@@ -14,8 +14,12 @@ import (
 func main() {
     http.HandleFunc("/", redisPingHandler)
 
-    // Bind to all interfaces
-    addr := ":8080"
+    port := os.Getenv("PORT")
+    if port == "" {
+        port = "8080"
+    }
+
+    addr := ":" + port
 
     log.Printf("Listening on %s...\n", addr)
     log.Fatal(http.ListenAndServe(addr, nil))
@@ -30,7 +34,7 @@ func redisPingHandler(w http.ResponseWriter, r *http.Request) {
         return
     }
 
-    conn, err := redis.Dial("tcp", redisHost+":6379")
+    conn, err := redis.Dial("tcp", redisHost)
     if err != nil {
         errMsg := fmt.Sprintf("Failed to connect to Redis: %v", err)
         http.Error(w, errMsg, http.StatusInternalServerError)
